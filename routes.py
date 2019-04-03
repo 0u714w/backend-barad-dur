@@ -11,12 +11,28 @@ attribute for each node.  After completion of depth first search,
 destination city should be labeled with the shortest distance from
 the start city.
 """
-__author__ = "???"
+__author__ = "dougenas"
 
 import argparse
+from sys import argv
+import sys
 
 
 def read_distances(map_file):
+    connections = dict()
+
+    for item in map_file:
+        lines = open(item).readlines()
+    for line in lines:
+        if line.startswith('#'):
+            pass
+        else:
+            stripped = line.strip()
+            values = stripped.split(",")
+            connections.update(values)
+    print(connections)
+
+
     """Read a distance table from a named file into a dict
        mapping sources to lists of (destination, distance) pairs.
     Args:
@@ -32,9 +48,9 @@ def read_distances(map_file):
         then we should have both d[x] contains (y,z) and d[y] contains (x,z), i.e.,
         we assume that roads are bi-directional.
     """
-    connections = dict()
-    raise NotImplementedError("Implement this function")
-    return connections
+
+    # raise NotImplementedError("Implement this function")
+    # return connections
 
 
 def show_roads(roads):
@@ -118,4 +134,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    read_distances(sys.argv[1:])
+    # main()
