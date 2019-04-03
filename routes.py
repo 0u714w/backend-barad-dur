@@ -14,23 +14,35 @@ the start city.
 __author__ = "dougenas"
 
 import argparse
-from sys import argv
 import sys
 
 
 def read_distances(map_file):
-    connections = dict()
+    # connections = {}
+    locations = []
+    destinations = []
+    cost = []
 
     for item in map_file:
         lines = open(item).readlines()
     for line in lines:
         if line.startswith('#'):
             pass
+        elif not line.strip():
+            pass
         else:
             stripped = line.strip()
             values = stripped.split(",")
-            connections.update(values)
+            locations.append(values[0])
+            destinations.append(values[1])
+            cost.append(values[2])
+    connections = dict(zip(locations, zip(destinations, cost)))
     print(connections)
+
+
+
+
+
 
 
     """Read a distance table from a named file into a dict
